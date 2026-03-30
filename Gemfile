@@ -8,6 +8,7 @@ group :test do
   gem 'rspec'
   gem 'rspec_junit_formatter'
   gem 'rubocop'
+  gem 'rubocop-legion', '~> 0.1'
   gem 'simplecov'
 
   gem 'legion-cache'

@@ -85,8 +85,8 @@ module Legion
 
           def parse_response(resp)
             body = begin
-              Legion::JSON.load(resp.body)
-            rescue StandardError
+              Legion::JSON.load(resp.body) # rubocop:disable Legion/HelperMigration/DirectJson
+            rescue StandardError => _e
               {}
             end
             { success: resp.is_a?(Net::HTTPSuccess), status: resp.code.to_i, data: body }
@@ -107,7 +107,7 @@ module Legion
           end
 
           def soft_warn(message)
-            Legion::Logging.warn("[lex-uais] #{message}") if defined?(Legion::Logging)
+            Legion::Logging.warn("[lex-uais] #{message}") if defined?(Legion::Logging) # rubocop:disable Legion/HelperMigration/DirectLogging, Legion/HelperMigration/LoggingGuard
           end
 
           include Helpers::Client if defined?(Helpers::Client)
