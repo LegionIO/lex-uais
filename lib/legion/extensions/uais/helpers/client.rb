@@ -17,7 +17,7 @@ module Legion
             http.instance_variable_set(:@_api_key, api_key)
 
             def http.api_key
-              @_api_key
+              @_api_key # rubocop:disable ThreadSafety/ClassInstanceVariable
             end
 
             http
@@ -36,7 +36,7 @@ module Legion
             req = klass.new(path)
             req['Content-Type'] = 'application/json'
             req['Authorization'] = "Bearer #{api_key}" if api_key
-            req.body = Legion::JSON.dump(body) if body
+            req.body = Legion::JSON.dump(body) if body # rubocop:disable Legion/HelperMigration/DirectJson
             req
           end
         end
